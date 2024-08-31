@@ -66,6 +66,7 @@ def train_logistic_regression(data_x, data_y, name_model_train):
     # regr = linear_model.LogisticRegression(solver='newton-cholesky', max_iter=200)
     # regr = linear_model.LogisticRegression(solver='sag', max_iter=200)
     # regr = linear_model.LogisticRegression(solver='saga', max_iter=200)
+    # regr = linear_model.LogisticRegressionCV(cv=10, penalty='l2', max_iter=500)
 
     regr.fit(dataset_x_train, dataset_y_train)
 
@@ -90,19 +91,20 @@ def train_logistic_regression(data_x, data_y, name_model_train):
     print(f'Recall na base de treino: {round(rec_train, 2) * 100}%')
     print(f'F1 score na base de treino: {round(f1_score_train, 2) * 100}%')
 
-    # # Plot da Matriz de Confusão
-    # plt.figure(figsize=(7, 5))
-    # sns.heatmap(cm_train, annot=True, fmt='g')
-    # plt.title('Matriz de Confusão: Base de Treino', weight='bold')
-    # plt.xlabel('Valores Previstos')
-    # plt.ylabel('Valores Reais')
-    # plt.show()
+    # Plot da Matriz de Confusão
+    plt.figure(figsize=(7, 5))
+    sns.heatmap(cm_train, annot=True, fmt='g')
+    plt.title('Matriz de Confusão: Base de Treino', weight='bold')
+    plt.xlabel('Valores Previstos')
+    plt.ylabel('Valores Reais')
+    plt.show()
 
     print('\nResultados dataset teste:')
     print(f'Acurácia na base de teste: {round(acc_test, 2) * 100}%')
     print(f'Precisão na base de teste: {round(prec_test, 2) * 100}%')
     print(f'Recall na base de teste: {round(rec_test, 2) * 100}%')
     print(f'F1 score na base de teste: {round(f1_score_test, 2) * 100}%')
+    print(metrics.classification_report(dataset_y_test, dataset_y_test_pred))
 
     # Plot da Matriz de Confusão
     plt.figure(figsize=(7, 5))
@@ -115,7 +117,7 @@ def train_logistic_regression(data_x, data_y, name_model_train):
     joblib.dump(regr, name_model_train)
 
 
-def predict_linear_regression(name_model_logistic_regression, x_input):
+def predict_logistic_regression(name_model_logistic_regression, x_input):
 
     # Carregando o modelo do arquivo
     regr = joblib.load(name_model_logistic_regression)
@@ -134,11 +136,11 @@ if __name__ == '__main__':
     data_complete_x = prepare_dataset(data_complete_x)
 
     # show_dataset(data_complete_x, data_y)
-    train_logistic_regression(data_complete_x, data_y, name_model)
+    # train_logistic_regression(data_complete_x, data_y, name_model)
 
-    # number = random.randint(0, 768)
-    # result_pred = predict_linear_regression(name_model, data_complete_x.iloc[[number]])
-    # print(f'\nPredict\nInput\n: {data_complete_x.iloc[[number]]} '
-    #       f'\nPredict result: {result_pred} \nReal result: {data_y[number]}')
+    number = random.randint(0, 768)
+    result_pred = predict_logistic_regression(name_model, data_complete_x.iloc[[number]])
+    print(f'\nPredict\nInput\n: {data_complete_x.iloc[[number]]} '
+          f'\nPredict result: {result_pred} \nReal result: {data_y[number]}')
 
 
