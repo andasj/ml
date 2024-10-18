@@ -107,15 +107,17 @@ def model_evaluate(model, dataset, history):
 
     plt.show()
 
-def model_predict(model, image_input, type_data=None):
+def model_predict(model, data, type_data=None):
 
     if type_data == 'image':
 
+        image_input = data
         image_resized = cv2.resize(image_input, (28, 28))
         image_normalized = image_resized / 255.0
         image = image_normalized.reshape(1, 28, 28, 1)
 
     else:
+        image_input = data[random.randint(0, len(data))]
         image = np.expand_dims(image_input, axis=0)
 
     predictions = model.predict(image)
@@ -133,26 +135,6 @@ def model_predict(model, image_input, type_data=None):
     plt.show()
 
     return predict_result
-
-# def model_predict_dataset(model, image_input, type_data):
-#
-#     img_batch = np.expand_dims(image_input, axis=0)
-#     predictions = model.predict(img_batch)
-#
-#     predict_result = np.argmax(predictions[0])
-#
-#     print(f"Result predict: {predict_result}")
-#
-#     plt.figure(figsize=(12, 5))
-#     plt.subplot(1, 2, 1)
-#     plt.imshow(image_input, cmap='gray')
-#     plt.subplot(1, 2, 2)
-#     plt.bar(list(range(0, 10)), predictions[0])
-#     plt.xticks(np.arange(0, 10, 1))
-#     plt.show()
-#
-#     return predict_result
-
 
 def create_model():
 
@@ -203,9 +185,9 @@ if __name__ == '__main__':
     checkpoint = ModelCheckpoint('model_cnn_mnist.keras', monitor='val_accuracy', save_best_only=True)
     history = model.fit(dataset['x_train'], dataset['y_train'], epochs=5, validation_data=(dataset['x_val'], dataset['y_val']), callbacks=[checkpoint])
     model_evaluate(model, dataset, history)
-    predict = model_predict(model, dataset['x_test'][random.randint(0, len(dataset['x_test']))])
+    predict = model_predict(model, dataset['x_test'])
 
     # Prediction
-    model = load_model('model_cnn_mnist.keras')
+    model_pred = load_model('model_cnn_mnist.keras')
     image = cv2.imread('example_mnist.png', 0)
-    predict = model_predict(model, image, 'image')
+    predict = model_predict(model_pred, image, 'image')

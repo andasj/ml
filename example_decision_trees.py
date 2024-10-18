@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import joblib
+import random
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from sklearn.model_selection import GridSearchCV
@@ -12,6 +14,7 @@ warnings.filterwarnings('ignore')
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
+
 
 def prepare_dataset_credito(data):
 
@@ -87,7 +90,7 @@ def prepare_dataset_credito(data):
 
     return data_x, data_y
 
-def train_trees(dataset_input_x, dataset_input_y):
+def train_trees(dataset_input_x, dataset_input_y, name_model_train):
 
     # Divisão dos dados em Treino e Teste
     dataset_x_train, dataset_x_test, dataset_y_train, dataset_y_test = train_test_split(dataset_input_x,
@@ -176,10 +179,30 @@ def train_trees(dataset_input_x, dataset_input_y):
     #                fontsize=9, node_ids=True, class_names=True)
     # plt.show()
 
+    joblib.dump(arvore_d, name_model_train)
+
+def predict_decision_trees(name_model_decision_trees, data_x, data_y):
+
+    number = random.randint(0, len(data_x))
+
+    # Carregando o modelo do arquivo
+    arvore_d = joblib.load(name_model_decision_trees)
+
+    # Fazendo previsões com o modelo carregado
+    y_pred = arvore_d.predict(data_x.iloc[[number]].values)
+
+    print(f'\nPredict\nInput: {dataset_x.iloc[[number]].values} '
+          f'\nPredict result: {y_pred[0]} \nReal result: {data_y[number]}')
+
+    return y_pred[0]
 
 if __name__ == '__main__':
+
+    name_model = 'credito_model_decision_trees.pkl'
 
     dataset_complete = pd.read_csv('credito.csv')
     dataset_x, dataset_y = prepare_dataset_credito(dataset_complete)
 
-    train_trees(dataset_x, dataset_y)
+    # train_trees(dataset_x, dataset_y, name_model)
+
+    result_pred = predict_decision_trees(name_model, dataset_x, dataset_y)
