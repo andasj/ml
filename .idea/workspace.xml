@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d1fab57-0d4a-4d38-a01d-8b39ae993c6b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/credito.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/credito_model_decision_trees.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset_diabetes.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diabetes_model_linear_regression.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diabetes_model_logistic_regression.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_cnn.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_decision_trees.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_linear_regression.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_logistic_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/example_logistic_regression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_mnist.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_cnn_mnist.keras" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pima-indians-diabetes.csv" beforeDir="false" />
-    </list>
+    <list default="true" id="7d1fab57-0d4a-4d38-a01d-8b39ae993c6b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
