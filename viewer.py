@@ -76,11 +76,11 @@ def show_video(video):
             frames.append([plt.imshow(video[i], cmap='gray', vmin=0, vmax=255, animated=True)])
         plt.title(title)
         plt.xticks([]), plt.yticks([])
-    ani = animation.ArtistAnimation(fig, frames, interval=400, blit=True, repeat_delay=1000)
+    # ani = animation.ArtistAnimation(fig, frames, interval=400, blit=True, repeat_delay=1000)
     plt.show()
 
 if __name__ == '__main__':
 
-    image = cv2.imread('/home/anderson/Downloads/gerber_stencil.png')
+    image = cv2.imread('./images/flamingo.jpg')
 
     show_image([image])
